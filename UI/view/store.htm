@@ -1,0 +1,33 @@
+﻿ <div class="container">
+ 
+    <div class="row">
+  <div class="col-sm-4">Search: <input ng-model="search"></div>
+  <div class="col-sm-8 text-right">
+<a href="default.htm#/cart" title="checkout"
+         ng-disabled="cart.getTotalCount() < 1">
+         <i class="icon-shopping-cart" />
+         <b>{{cart.getTotalCount()}}</b> items,
+         <b>{{cart.getTotalPrice() | currency}}</b>
+      </a>  
+  </div>
+	</div> 
+ 
+    <div class="row">
+        <div ng-repeat="(id, product) in store.products | orderBy:'name' | filter:search">
+            <div class="col-md-4 portfolio-item" id="{{id}}" ng-init="init(product)">
+                <a href="#">
+                    <img class="img-responsive" ng-src="img/products/small/{{product.code}}.png" alt="{{product.name}}" width="230" height="210">
+                </a>
+                <h3>
+                    <a href="#/products/{{product.code}}"><b>{{product.name}}</b></a></br>{{product.price | currency}}
+                </h3>
+
+                <p>{{product.description}}</p>
+                <a href=""
+                   ng-click="cart.addItem(product.code, product.name, product.price, 1)">
+                    Register
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
